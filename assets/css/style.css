@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+  --cyan: #37E6AF;
+  --pink: #F90D5B;
+  --grey: #B0B0B0;
+  --black: #000;
+  --black2: #262626;
+  --white: #fff;
+}
+
+hr {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  width: 0; 
+  transition: all linear 0.2s;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  font-family: 'Oswald', sans-serif;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--black);
+}
+
+.headerTitle > h1 {
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.socialIcons > a, .loginIcon > a {
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.socialIcons > a {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background: var(--black2);
+}
+
+.socialIcons > a:hover, .loginIcon > a:hover {
+  color: var(--cyan);
+  transition: all linear 0.2s;
+}
+
+.navbar {
+  position: relative;
+  top: 90px;
+}
+
+.navbar > ul {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.navbarLink > a {
+  color: var(--black);
+  font-weight: 500;
+}
+
+.navbarLink > a:hover > hr {
+  border-color: var(--cyan);
+  width: 100%;
+}
+
