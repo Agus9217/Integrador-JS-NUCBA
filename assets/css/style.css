@@ -49,6 +49,7 @@ hr {
 }
 
 .socialIcons > a {
+  margin: 0 5px;
   text-align: center;
   width: 40px;
   height: 40px;
@@ -74,7 +75,7 @@ hr {
 }
 
 .navbarLink > a {
-  color: var(--black);
+  color: var(--black2);
   font-weight: 500;
 }
 
@@ -82,4 +83,29 @@ hr {
   border-color: var(--cyan);
   width: 100%;
 }
+
+.main {
+  margin: auto;
+  position: relative;
+  top: 120px;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.newsSection {
+  display: flex;
+}
+
+.trendingTitle > span {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--white);
+  background: var(--pink);
+  padding: 3px 15px;
+  clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+}
+
+
 
