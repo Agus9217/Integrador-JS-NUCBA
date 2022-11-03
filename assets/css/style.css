@@ -29,11 +29,13 @@ hr {
 .header {
   display: flex;
   position: fixed;
+  padding: 0 20px;
   top: 0;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background: var(--black);
+  z-index: 100;
 }
 
 .headerTitle > h1 {
@@ -56,6 +58,10 @@ hr {
   line-height: 40px;
   border-radius: 50%;
   background: var(--black2);
+}
+
+.loginIcon {
+  margin: 0 5px;
 }
 
 .socialIcons > a:hover, .loginIcon > a:hover {
@@ -87,24 +93,39 @@ hr {
 .main {
   margin: auto;
   position: relative;
-  top: 120px;
-  max-width: 1400px;
+  top: 80px;
+  max-width: 1700px;
+  padding: 1.2rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main > * {
+  flex: 1 1 20em;
+}
+
+.newsColumns {
+  padding: 5px;
+  width: 300px;
+}
+
+.newsColumns:nth-child(2) {
+  flex-grow: 2;
+}
+
+.newsColumns > img {
   width: 100%;
 }
 
-.newsSection {
-  display: flex;
-}
-
-.trendingTitle > span {
-  text-transform: uppercase;
-  font-size: 1.2rem;
+.trendingTitle {
+  text-align: center;
+  background: var(--pink);
+  color: var(--white);
+  margin-bottom: 5px;
+  padding: 5px 0;
   font-weight: 500;
   font-style: italic;
-  color: var(--white);
-  background: var(--pink);
-  padding: 3px 15px;
-  clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
 }
 
 
