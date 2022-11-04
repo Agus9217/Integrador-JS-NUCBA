@@ -32,6 +32,7 @@ hr {
   padding: 0 20px;
   top: 0;
   width: 100%;
+  min-height: 80px;
   justify-content: space-between;
   align-items: center;
   background: var(--black);
@@ -39,7 +40,8 @@ hr {
 }
 
 .headerTitle > h1 {
-  font-size: 3rem;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-style: italic;
   font-weight: 700;
   color: var(--cyan);
@@ -67,6 +69,19 @@ hr {
 .socialIcons > a:hover, .loginIcon > a:hover {
   color: var(--cyan);
   transition: all linear 0.2s;
+}
+
+.menuContainer {
+  position: absolute;
+  right: 0;
+  margin: 0 5px;
+  padding: 0 20px;
+  visibility: hidden;
+}
+
+.menuContainer > i {
+  font-size: 2rem;
+  color: var(--white);
 }
 
 .navbar {
@@ -118,7 +133,7 @@ hr {
   width: 100%;
 }
 
-.trendingTitle {
+.trendingTitle, .newsCategories {
   text-align: center;
   background: var(--pink);
   color: var(--white);
@@ -128,5 +143,34 @@ hr {
   font-style: italic;
 }
 
+.newsCategories > ul {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.newsCategoriesLink > a {
+  color: var(--white);
+}
 
 
+
+
+
+@media (max-width:998px) {
+  .socialIcons , .loginIcon {
+    display: none;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .menuContainer {
+    visibility: visible;
+  }
+
+  .newsColumns:nth-child(1) {
+    order: 1;
+  }
+}
