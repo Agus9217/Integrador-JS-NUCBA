@@ -4,6 +4,8 @@
   --cyan: #37E6AF;
   --pink: #F90D5B;
   --grey: #B0B0B0;
+  --grey2: #AAAAAA;
+  --grey3: #777777;
   --black: #000;
   --black2: #262626;
   --white: #fff;
@@ -109,7 +111,7 @@ hr {
   margin: auto;
   position: relative;
   top: 80px;
-  max-width: 1700px;
+  max-width: 1200px;
   padding: 1.2rem;
   width: 100%;
   display: flex;
@@ -122,36 +124,95 @@ hr {
 
 .newsColumns {
   padding: 5px;
-  width: 300px;
+  width: 200px;
 }
 
 .newsColumns:nth-child(2) {
-  flex-grow: 2;
+  flex-grow: 5;
 }
 
 .newsColumns > img {
   width: 100%;
 }
 
-.trendingTitle, .newsCategories {
+.trendingTitle {
+  text-transform: uppercase;
   text-align: center;
   background: var(--pink);
   color: var(--white);
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   padding: 5px 0;
   font-weight: 500;
   font-style: italic;
 }
 
-.newsCategories > ul {
+.newsCategories > div {
   display: flex;
   justify-content: center;
   gap: 40px;
+  margin-bottom: 20px;
 }
 
-.newsCategoriesLink > a {
+.newsCategoriesLink {
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--grey2);
+  padding: 5px 10px;
+}
+
+.newsCategoriesLink:hover, .activeCategories {
+  background: var(--pink);
   color: var(--white);
 }
+
+.trendingGroup {
+  padding-bottom: 20px;
+}
+
+.trendingInfo, .firstInfo {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.trendingCategory , .firsCategory, .newsCategoriesDate {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--grey3);
+}
+
+.firstGroup > img {
+  width: 100%;
+}
+
+.firstGroup {
+  position: relative;
+}
+
+.firstGroupText {
+  position: absolute;
+  padding: 10px;
+  bottom: 2%;
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.newsCategoriesGroup > img {
+  max-width: 150px;
+  width: 100%;
+}
+
+.newsCategoriesGroup {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 2rem;
+}
+
+.newsInfo {
+  display: block;
+}
+
+
 
 
 
@@ -172,5 +233,9 @@ hr {
 
   .newsColumns:nth-child(1) {
     order: 1;
+  }
+
+  .newsColumns:nth-child(3) {
+    order: 2;
   }
 }
