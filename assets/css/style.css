@@ -107,18 +107,18 @@ hr {
   width: 100%;
 }
 
-.main {
-  margin: auto;
+.newsSection {
+  margin: 0 auto;
   position: relative;
   top: 80px;
-  max-width: 1200px;
+  max-width: 1300px;
   padding: 1.2rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
 
-.main > * {
+.newsSection > * {
   flex: 1 1 20em;
 }
 
@@ -170,12 +170,12 @@ hr {
   padding-bottom: 20px;
 }
 
-.trendingInfo, .firstInfo {
+.trendingInfo, .firstInfo, .newsVideoInfo {
   display: block;
   font-size: 1.2rem;
 }
 
-.trendingCategory , .firsCategory, .newsCategoriesDate {
+.trendingCategoryDate, .firsCategoryDate, .newsCategoriesDate {
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--grey3);
@@ -204,19 +204,101 @@ hr {
 
 .newsCategoriesGroup {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   padding-bottom: 2rem;
 }
 
-.newsInfo {
+.newsVideos {
+  position: relative;
+  top: 80px;
+  background: var(--black);
+}
+
+.newsVideosTitle {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--white);
+  background: var(--pink);
+  text-align: center;
+  padding: 2rem;
+}
+
+.newsVideosMain {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.newsVideosMain > * {
+  flex: 1 1 25em;
+}
+
+.newsVideosColumn:nth-child(1) {
+  flex-grow: 10;
+}
+
+.newsVideosColumn {
+  width: 300px;
+}
+
+.newsVideosColumn > video {
+  width: 100%;
+  height: 100%;
+}
+
+.newsVideosGroup > img {
+  max-width: 150px;
+  width: 100%;
+}
+
+.newsVideosGroup {
+  padding: 15px 0;
+}
+
+.newsVideosColumn {
+  padding: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.newsVideosGroupText {
+  width: 100%;
+  position: absolute;
+  bottom: 10%;
+  color: var(--white);
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.newsVideosGroup {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.newsVideosGroupTextColumnInfo {
   display: block;
+}
+
+.newsVideosGroupTextColumn {
+  color: var(--white);
 }
 
 
 
 
-
-
+@media (max-width:321px) {
+  .newsCategoriesGroup, .newsVideosGroup {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 @media (max-width:998px) {
   .socialIcons , .loginIcon {
@@ -237,5 +319,9 @@ hr {
 
   .newsColumns:nth-child(3) {
     order: 2;
+  }
+
+  .newsCategories > div {
+    background: var(--black2);
   }
 }
