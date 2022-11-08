@@ -211,7 +211,7 @@ hr {
 .newsVideos {
   position: relative;
   top: 80px;
-  background: var(--black);
+  background: var(--black2);
 }
 
 .newsVideosTitle {
@@ -255,7 +255,7 @@ hr {
 }
 
 .newsVideosGroup {
-  padding: 15px 0;
+  padding: 10px 0;
 }
 
 .newsVideosColumn {
@@ -289,6 +289,21 @@ hr {
   color: var(--white);
 }
 
+.footer {
+  position: relative;
+  top: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  background: var(--black);
+}
+
+.footerDesignBy {
+  color: var(--white);
+  margin: 0 5px;
+}
+
 
 
 
@@ -306,7 +321,28 @@ hr {
   }
 
   .navbar {
-    display: none;
+    padding: 2rem 0;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    top: 0;
+    background: var(--black2);
+    border: 2px solid var(--cyan);
+    z-index: 90;
+  }
+
+  .visibility {
+    visibility: hidden;
+  }
+
+  .navbarLink > a {
+    color: var(--white);
+  }
+
+  .navbar > ul {
+    flex-direction: column;
+    align-items: center;
   }
 
   .menuContainer {
