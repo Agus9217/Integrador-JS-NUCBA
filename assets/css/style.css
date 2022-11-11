@@ -131,7 +131,7 @@ hr {
   flex-grow: 5;
 }
 
-.newsColumns > img {
+.newsColumns > img, #trendingNews > div > img {
   width: 100%;
 }
 
