@@ -81,7 +81,6 @@ const showNavbar = () => {
   })
 }
 
-showNavbar()
 
 
 
@@ -91,6 +90,7 @@ showNavbar()
 const init = () => {
   window.addEventListener('DOMContentLoaded', () => {
     fetchApiReq()
+    showNavbar()
   })
 }
 
