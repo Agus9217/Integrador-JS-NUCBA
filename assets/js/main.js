@@ -30,7 +30,7 @@ const renderTrending = (data) => {
     <div class="trendingGroup">
       <div>
         <span class="trendingCategoryDate">${subSection.toUpperCase()} / ${item.published_date}</span>
-        <a href="" target="_blank" rel="noreferrer nofollow noopener" class="trendingInfo">${item.title}</a>
+        <a href="${item.short_url}" target="_blank" rel="noreferrer nofollow noopener" class="trendingInfo">${item.title}</a>
       </div>
     </div>
     `
@@ -48,7 +48,7 @@ const renderNewsCategories = (data) => {
     <img src="${item.multimedia[0].url}" alt="">
     <div class="newsCategoriesGroupText">
       <span class="newsCategoriesDate">${subSection.toUpperCase()} / ${item.published_date}</span>
-      <a href="" target="_blank" rel="noreferrer nofollow noopener" class="newsInfo">${item.title}</a>
+      <a href="${item.short_url}" target="_blank" rel="noreferrer nofollow noopener" class="newsInfo">${item.title}</a>
     </div>
     `
     newsCategories.appendChild(createDivNewsCategories)
@@ -56,6 +56,7 @@ const renderNewsCategories = (data) => {
 }
 
 const renderFirstGroup = (data) => {
+  console.log(data)
   const sliceArray = data.slice(22,27)
   sliceArray.map((item) => {
     const subSection = item.subsection
@@ -66,7 +67,7 @@ const renderFirstGroup = (data) => {
     <img src="${item.multimedia[0].url}" alt="">
     <div class="firstGroupText">
       <span class="firstCategoryDate">${subSection.toUpperCase()} / ${item.published_date}</span>
-      <a href="" target="_blank" rel="noreferrer nofollow noopener" class="firstInfo">${item.title}</a>
+      <a href="${item.short_url}" target="_blank" rel="noreferrer nofollow noopener" class="firstInfo">${item.title}</a>
     </div>
     </div>
     `
