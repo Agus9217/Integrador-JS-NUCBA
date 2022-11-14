@@ -1,6 +1,8 @@
 const trendingNews = document.getElementById('trendingNews')
 const newsCategories = document.getElementById('newsCategories')
 const firstGroup = document.getElementById('firstGroup')
+const navBar = document.getElementById('navbar')
+const btnMenu = document.getElementById('btn-menu')
 
 const API_KEY = '?api-key=WSrOMYCMGGRxhUKZNxLAFV2QLxblG6yG'
 const API_URL = `https://api.nytimes.com/svc/topstories/v2/sports.json${API_KEY}`
@@ -56,7 +58,6 @@ const renderNewsCategories = (data) => {
 const renderFirstGroup = (data) => {
   const sliceArray = data.slice(22,27)
   sliceArray.map((item) => {
-    console.log(item)
     const subSection = item.subsection
     const createDivFirstGroup = document.createElement('div')
     createDivFirstGroup.className = 'firstGroup'
@@ -72,6 +73,14 @@ const renderFirstGroup = (data) => {
     firstGroup.appendChild(createDivFirstGroup)
   })
 }
+
+const showNavbar = () => {
+  btnMenu.addEventListener('click', ()=> {
+    navBar.classList.toggle('visibility')
+  })
+}
+
+showNavbar()
 
 
 
