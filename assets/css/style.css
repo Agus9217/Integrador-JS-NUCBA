@@ -175,6 +175,19 @@ hr {
   font-size: 1.2rem;
 }
 
+.firstInfo {
+  color: var(--white);
+}
+
+.newsInfo {
+  display: block;
+  color: var(--black);
+}
+
+.trendingInfo {
+  color: var(--black);
+}
+
 .trendingCategoryDate, .firsCategoryDate, .newsCategoriesDate {
   font-size: 0.8rem;
   font-weight: 500;
@@ -190,6 +203,7 @@ hr {
 }
 
 .firstGroupText {
+  width: 100%;
   position: absolute;
   padding: 10px;
   bottom: 2%;
