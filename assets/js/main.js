@@ -1,24 +1,59 @@
+// 👉 Que se rendericen ciertas partes de la página (carrito, productos, etc.) desde Js.
+//
+// 👉 Que se utilicen buenas prácticas a la hora de estructurar y organizar el código (buena organización del código en general, por ejemplo, buenos nombres de variables, funciones y parámetros).
+//
+// 👉 Deberá tener al menos una funcionalidad en la que capture datos de una parte de la página y cree un componente HTML en base a eso (Por ejemplo, una funcionalidad de agregar un producto al carrito, que tome los datos de dicho producto para renderizarlo en el mismo).
+//
+// 👉 Deberá utilizar localStorage, para persistir datos en el sitio.
+//
+// 👉 En caso de que lo deseen, podrán usar algún framework de CSS para el estilado de la página.
+//
+// 👉 El Sitio deberá ser una landing page totalmente responsive, en la que deberá haber una sección de productos y una página  de login ( como referencia para organizarse, pueden tomar la estructura del Nucba NFT y agregar la página de login y registro).
+//
+// 👉 El sitio debe ser responsivo y tener menú hamburguesa (funcional, realizado con js) en las resoluciones (mobile, tablet, etc.) que corresponda.
+//
+// 👉 Deberá tener la funcionalidad de filtrar por categorías. (productos o noticias).
+//
+// 👉 OPCIONAL: Si conocen alguna API de Productos/Noticias que quieran utilizar en lugar de traer los datos  desde un archivo de JS, pueden hacerlo.
+//
+// 👉 Deberán entregar el repositorio de Github, con el Vercel de la página vinculado.
+
+
 const trendingNews = document.getElementById('trendingNews')
 const newsCategories = document.getElementById('newsCategories')
 const firstGroup = document.getElementById('firstGroup')
 const navBar = document.getElementById('navbar')
 const btnMenu = document.getElementById('btn-menu')
+const Storage = window.localStorage
 
 const API_KEY = '?api-key=WSrOMYCMGGRxhUKZNxLAFV2QLxblG6yG'
 const API_URL = `https://api.nytimes.com/svc/topstories/v2/sports.json${API_KEY}`
+const API_URL_VIDEO = 'https://api.dailymotion.com/videos?channel=sport&limit=50&flags=verified'
+
+
 
 const fetchApiReq = async () => {
   const res = await fetch(API_URL)
   const data = await res.json()
-  filterList(data.results)
+  Storage.setItem('News', JSON.stringify(data.results))
 }
 
-const filterList = (data) => {
-  const shuffledArray = data.sort(() => 0.5 - Math.random());
-  renderTrending(shuffledArray)
-  renderNewsCategories(shuffledArray)
-  renderFirstGroup(shuffledArray)
+const fetchApiVideo = async () => {
+  const res = await fetch(API_URL_VIDEO)
+  const data = await res.json()
+  Storage.setItem('Videos', JSON.stringify(data.list))
 }
+
+
+
+
+// const filterList = (data) => {
+//   const shuffledArray = data.sort(() => 0.5 - Math.random());
+//   console.log(shuffledArray)
+//   // renderTrending(shuffledArray)
+//   // renderNewsCategories(shuffledArray)
+//   // renderFirstGroup(shuffledArray)
+// }
 
 const renderTrending = (data) => {
   const sliceArray = data.slice(0,6)
@@ -56,7 +91,6 @@ const renderNewsCategories = (data) => {
 }
 
 const renderFirstGroup = (data) => {
-  console.log(data)
   const sliceArray = data.slice(22,27)
   sliceArray.map((item) => {
     const subSection = item.subsection
@@ -81,15 +115,10 @@ const showNavbar = () => {
   })
 }
 
-
-
-
-
-
-
 const init = () => {
   window.addEventListener('DOMContentLoaded', () => {
     fetchApiReq()
+    fetchApiVideo()
     showNavbar()
   })
 }
