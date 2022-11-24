@@ -26,16 +26,19 @@ const navBar = document.getElementById('navbar')
 const btnMenu = document.getElementById('btn-menu')
 const Storage = window.localStorage
 
-const API_KEY = '?api-key=WSrOMYCMGGRxhUKZNxLAFV2QLxblG6yG'
-const API_URL = `https://api.nytimes.com/svc/topstories/v2/sports.json${API_KEY}`
+const API_KEY = 'WSrOMYCMGGRxhUKZNxLAFV2QLxblG6yG'
+const API_URL = `https://api.nytimes.com/svc/topstories/v2/sports.json?api-key=${API_KEY}`
 const API_URL_VIDEO = 'https://api.dailymotion.com/videos?channel=sport&limit=50&flags=verified'
 
-
+const getNewsArray = Storage.getItem('News')
+const parseNewsArray = JSON.parse(getNewsArray)
+const getVideosArray = Storage.getItem('Videos')
+const parseVideosArray = JSON.parse(getVideosArray)
 
 const fetchApiReq = async () => {
   const res = await fetch(API_URL)
   const data = await res.json()
-  Storage.setItem('News', JSON.stringify(data.results))
+  Storage.setItem('News', JSON.stringify(data.results)) 
 }
 
 const fetchApiVideo = async () => {
@@ -44,20 +47,15 @@ const fetchApiVideo = async () => {
   Storage.setItem('Videos', JSON.stringify(data.list))
 }
 
+const sortArray = (array, func) => {
+  const shuffledArray = array.sort(() => 0.5 - Math.random());
+  func(shuffledArray) 
+}
 
-
-
-// const filterList = (data) => {
-//   const shuffledArray = data.sort(() => 0.5 - Math.random());
-//   console.log(shuffledArray)
-//   // renderTrending(shuffledArray)
-//   // renderNewsCategories(shuffledArray)
-//   // renderFirstGroup(shuffledArray)
-// }
-
-const renderTrending = (data) => {
-  const sliceArray = data.slice(0,6)
-  sliceArray.map((item) => {
+const renderHtml = (data) => {
+  const sliceTrendingArray = data.slice(0,6)
+  sliceTrendingArray.map((item) => {
+    console.log(item)
     const subSection = item.subsection
     const createDivTrending = document.createElement('div')
     createDivTrending.innerHTML = `
@@ -71,11 +69,9 @@ const renderTrending = (data) => {
     `
     trendingNews.appendChild(createDivTrending)
   })
-}
 
-const renderNewsCategories = (data) => {
-  const sliceArray = data.slice(7,21)
-  sliceArray.map((item) => {
+  const sliceNewsCategoriesArray = data.slice(7,21)
+  sliceNewsCategoriesArray.map((item) => {
     const subSection = item.subsection
     const createDivNewsCategories = document.createElement('div')
     createDivNewsCategories.className = "newsCategoriesGroup"
@@ -88,11 +84,9 @@ const renderNewsCategories = (data) => {
     `
     newsCategories.appendChild(createDivNewsCategories)
   })
-}
 
-const renderFirstGroup = (data) => {
-  const sliceArray = data.slice(22,27)
-  sliceArray.map((item) => {
+  const sliceFirstGroupArray = data.slice(22,27)
+  sliceFirstGroupArray.map((item) => {
     const subSection = item.subsection
     const createDivFirstGroup = document.createElement('div')
     createDivFirstGroup.className = 'firstGroup'
@@ -107,7 +101,14 @@ const renderFirstGroup = (data) => {
     `
     firstGroup.appendChild(createDivFirstGroup)
   })
+
 }
+
+
+sortArray(parseNewsArray, (func) => {
+  renderHtml(func)
+})
+
 
 const showNavbar = () => {
   btnMenu.addEventListener('click', ()=> {
@@ -154,10 +155,10 @@ init()
   // </div>
   
 // first Group
-{/* <div class="firstGroup">
-  <img src="/assets/img/bosque-1.jpeg" alt="">
-  <div class="firstGroupText">
-    <span class="firstCategoryDate">Entertainment / 3 years ago</span>
-    <span class="firstInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, maxime. Ex neque distinctio aspernatur</span>
-  </div>
-</div>  */}
+// {/* <div class="firstGroup">
+//   <img src="/assets/img/bosque-1.jpeg" alt="">
+//   <div class="firstGroupText">
+//     <span class="firstCategoryDate">Entertainment / 3 years ago</span>
+//     <span class="firstInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, maxime. Ex neque distinctio aspernatur</span>
+//   </div>
+// </div>  */}
