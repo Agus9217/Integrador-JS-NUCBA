@@ -24,6 +24,8 @@ const newsCategories = document.getElementById('newsCategories')
 const firstGroup = document.getElementById('firstGroup')
 const navBar = document.getElementById('navbar')
 const btnMenu = document.getElementById('btn-menu')
+const preloader = document.getElementById('preloader')
+const newsVideosColumn = document.getElementById('newsVideoColumn')
 const Storage = window.localStorage
 
 const API_KEY = 'WSrOMYCMGGRxhUKZNxLAFV2QLxblG6yG'
@@ -31,9 +33,9 @@ const API_URL = `https://api.nytimes.com/svc/topstories/v2/sports.json?api-key=$
 const API_URL_VIDEO = 'https://api.dailymotion.com/videos?channel=sport&limit=50&flags=verified'
 
 const getNewsArray = Storage.getItem('News')
-const parseNewsArray = JSON.parse(getNewsArray)
+const parseNewsArray = JSON.parse(getNewsArray) || []
 const getVideosArray = Storage.getItem('Videos')
-const parseVideosArray = JSON.parse(getVideosArray)
+const parseVideosArray = JSON.parse(getVideosArray) || []
 
 const fetchApiReq = async () => {
   const res = await fetch(API_URL)
@@ -47,15 +49,26 @@ const fetchApiVideo = async () => {
   Storage.setItem('Videos', JSON.stringify(data.list))
 }
 
+const preloaderInit = () => {
+  setTimeout(() => {
+    preloader.style.display = 'none'
+  }, 2500);
+}
+
+if (Storage.length === 0) {
+  setTimeout(() => {
+    window.location.reload()
+  }, 3000);
+} 
+
 const sortArray = (array, func) => {
   const shuffledArray = array.sort(() => 0.5 - Math.random());
   func(shuffledArray) 
 }
 
 const renderHtml = (data) => {
-  const sliceTrendingArray = data.slice(0,6)
+  const sliceTrendingArray = data.slice(0,5)
   sliceTrendingArray.map((item) => {
-    console.log(item)
     const subSection = item.subsection
     const createDivTrending = document.createElement('div')
     createDivTrending.innerHTML = `
@@ -70,16 +83,19 @@ const renderHtml = (data) => {
     trendingNews.appendChild(createDivTrending)
   })
 
-  const sliceNewsCategoriesArray = data.slice(7,21)
+  const sliceNewsCategoriesArray = data.slice(7,19)
   sliceNewsCategoriesArray.map((item) => {
     const subSection = item.subsection
-    const createDivNewsCategories = document.createElement('div')
+    const createDivNewsCategories = document.createElement('a')
+    createDivNewsCategories.href = item.short_url
+    createDivNewsCategories.target = '_blank'
+    createDivNewsCategories.rel = 'noreferrer nofollow noopener'
     createDivNewsCategories.className = "newsCategoriesGroup"
     createDivNewsCategories.innerHTML = `
     <img src="${item.multimedia[0].url}" alt="">
     <div class="newsCategoriesGroupText">
       <span class="newsCategoriesDate">${subSection.toUpperCase()} / ${item.published_date}</span>
-      <a href="${item.short_url}" target="_blank" rel="noreferrer nofollow noopener" class="newsInfo">${item.title}</a>
+      <span class="newsInfo">${item.title}</span>
     </div>
     `
     newsCategories.appendChild(createDivNewsCategories)
@@ -88,27 +104,66 @@ const renderHtml = (data) => {
   const sliceFirstGroupArray = data.slice(22,27)
   sliceFirstGroupArray.map((item) => {
     const subSection = item.subsection
-    const createDivFirstGroup = document.createElement('div')
+    const createDivFirstGroup = document.createElement('a')
+    createDivFirstGroup.href = item.short_url
+    createDivFirstGroup.target = '_blank'
+    createDivFirstGroup.rel = 'noreferrer nofollow noopener'
     createDivFirstGroup.className = 'firstGroup'
     createDivFirstGroup.innerHTML = `
     <div class="firstGroup">
     <img src="${item.multimedia[0].url}" alt="">
     <div class="firstGroupText">
       <span class="firstCategoryDate">${subSection.toUpperCase()} / ${item.published_date}</span>
-      <a href="${item.short_url}" target="_blank" rel="noreferrer nofollow noopener" class="firstInfo">${item.title}</a>
+      <span class="firstInfo">${item.title}</span>
     </div>
     </div>
     `
     firstGroup.appendChild(createDivFirstGroup)
   })
-
 }
 
+const renderHtmlVideo = (data) => {
+  console.log(data[0])
+  const createNewsVideoColumn = document.createElement('a')
+  createNewsVideoColumn.className = 'newsVideosColumn'
+  createNewsVideoColumn.href = `http://www.dailymotion.com/video/${data[0].id}`
+  createNewsVideoColumn.target = '_blank'
+  createNewsVideoColumn.rel = 'noreferrer nofollow noopener'
+  createNewsVideoColumn.innerHTML = `
+            <img src='http://www.dailymotion.com/thumbnail/video/${data[0].id}'>
+            <div class="newsVideosGroupText">
+              <span class="newsVideosDate">Entertainment / 3 years ago</span>
+              <span class="newsVideoInfo">${data[0].title}</span>
+            </div>
+
+`
+  const sliceNewsVideos = data.slice(1,4)
+  sliceNewsVideos.map((item) => {
+    console.log(item)
+    createNewsVideoColumnTwo = document.createElement('a')
+    createNewsVideoColumnTwo.className = 'newsVideosColumn'
+    createNewsVideoColumnTwo.innerHTML = `
+            <div class="newsVideosGroup">
+              <img src="http://www.dailymotion.com/thumbnail/video/${item.id}" alt="">
+              <div class="newsVideosGroupTextColumn">
+                <span class="newsVideosGroupTextColumnInfo">item.title</span>
+              </div>
+            </div>
+`
+  newsVideosColumn.appendChild(createNewsVideoColumnTwo)
+  })
+
+
+  newsVideosColumn.appendChild(createNewsVideoColumn)
+}
 
 sortArray(parseNewsArray, (func) => {
   renderHtml(func)
 })
 
+sortArray(parseVideosArray, (func) => {
+  renderHtmlVideo(func)
+})
 
 const showNavbar = () => {
   btnMenu.addEventListener('click', ()=> {
@@ -121,6 +176,7 @@ const init = () => {
     fetchApiReq()
     fetchApiVideo()
     showNavbar()
+    preloaderInit()
   })
 }
 
@@ -162,3 +218,19 @@ init()
 //     <span class="firstInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, maxime. Ex neque distinctio aspernatur</span>
 //   </div>
 // </div>  */}
+//
+//
+// <video src="/assets/video/personas-video-1.mp4" autoplay loop muted></video>
+            // <div class="newsVideosGroupText">
+            //   <span class="newsVideosDate">Entertainment / 3 years ago</span>
+            //   <span class="newsVideoInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, maxime. Ex neque distinctio aspernatur</span>
+            // </div>
+//
+
+            // <div class="newsVideosGroup">
+            //   <img src="/assets/img/persona-1.jpeg" alt="">
+            //   <div class="newsVideosGroupTextColumn">
+            //     <span class="newsVideosGroupTextColumnDate">Entertainment / 3 years ago</span>
+            //     <span class="newsVideosGroupTextColumnInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, maxime. Ex neque distinctio aspernatur</span>
+            //   </div>
+            // </div>
